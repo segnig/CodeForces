@@ -15,7 +15,3 @@ if odd(num):
     print(*num)
 else:
     print(*num)
-    
-
-        
-    
