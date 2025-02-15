@@ -14,7 +14,7 @@ def solver(nums, k):
             while max_q and  nums[right] > max_q[0]:
                 max_q.pop()
             max_q.append(nums[right])
-        if nums[right] < 
+        if nums[right] < nums
             
         
         
@@ -26,13 +26,8 @@ def solver(nums, k):
                 min_q.popleft()
             result += right - left 
             left += 1
-        
-    
-
 
 
 n, k = map(int, input().split())
 
 nums = list(map(int, input().split()))
-
-
