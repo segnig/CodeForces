@@ -7,16 +7,11 @@ def solver(nums, x, n):
             return False
     return True
 
-
 for _ in range(int(input())):
     n, x = map(int, input().split())
-    
     nums = list(map(int, input().split()))
-    
     nums.sort()
-    
     test = solver(nums, x, n)
-    
     if test:
         print("YES")
     else:

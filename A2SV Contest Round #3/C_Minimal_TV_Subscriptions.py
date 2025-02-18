@@ -1,7 +1,5 @@
 from collections import defaultdict
 
-
-
 for _ in range(int(input())):
     n, k, d = map(int, input().split())
     nums = list(map(int, input().split()))
@@ -27,12 +25,4 @@ for _ in range(int(input())):
         
         
     res = min(res, l)
-        
-            
-    
-       
-    
-      
     print(res)
-        
-    #print(res)

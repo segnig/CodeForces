@@ -34,5 +34,4 @@ num2 = list(map(int, input().split()))
 if sum(num1) != sum(num2):
     print(-1)
 else:
-        
     print(solver(num1, num2))
