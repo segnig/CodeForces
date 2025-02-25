@@ -1,60 +1,51 @@
-def check(matrix, x, y):
-    hori = 0
-    vert = 0
-    if x > 0:
-        if matrix[x-1][y] == ".":
-            hori = 1
-    if y > 0:
-        if matrix[x][y - 1] == ".":
-            vert = 1     
-    return hori, vert
-    
-r, c = map(int, input().split())
+n, m = map(int, input().split())
+
+def check(matrix, row, col):
+    p = 0
+    if matrix[row][col] == "#":
+        return p
+    if row > 0 and matrix[row - 1][col] == ".":
+        p += 1
+    if col > 0 and matrix[row][col - 1] == ".":
+        p += 1
+    return p
+        
+
 
 matrix = []
 
-for _ in range(r):
+for _ in range(n):
     row = input()
     matrix.append(row)
     
-pr = [[[0, 0] for p in range(c + 1)] for _ in range(r + 1)]
+prefix_matrix = [[0 for _ in range(m + 1)] for p in range(n + 1)]
 
+pr = prefix_matrix.copy()
 
-for row in range(1, r + 1):
-    for col in range(1, c + 1):
-        if matrix[row - 1][col - 1]:
-            a, b = check(matrix=matrix, x=row - 1, y=col- 1)
-        else:
-            a, b = 0, 0
-        pr[row][col][0] = a + pr[row][col - 1][0] + pr[row - 1][col][0] - pr[row - 1][col - 1][0]
-        pr[row][col][1] = b + pr[row][col - 1][1] + pr[row - 1][col][1] - pr[row - 1][col - 1][1]
-
-co_pr = []
-for row in pr:
-    rrr = []
-    for cell in row:
-        rrr.append(sum(cell))
-    co_pr.append(rrr)
+for r in range(1, n + 1):
+    for c in range(1, m + 1):
+        prefix_matrix[r][c] = (
+            prefix_matrix[r-1][c] + 
+            prefix_matrix[r][c-1] -
+            prefix_matrix[r-1][c-1] + 
+            prefix_matrix[r][c] + 
+            check(matrix=matrix, row=r-1, col=c-1)
+        )
         
-for row in co_pr:
-    print(row)  
-        
+
+
 for _ in range(int(input())):
     r1, c1, r2, c2 = map(int, input().split())
     
-    above0 = pr[r2][c2][0] - pr[r1-1][c2][0]
-    above1 = pr[r2][c2][1] - pr[r1-1][c2][1]
+    left = prefix_matrix[r2][c1-1]
+    above = prefix_matrix[r1 -1][c2]
+    result = prefix_matrix[r2][c2] - left - above + prefix_matrix[r1-1][c1-1]
     
-    left0 = pr[r2][c2][0] - pr[r1][c1 -1][0]
-    left1 = pr[r2][c2][0] - pr[r1][c2 -1][1]
-    
-    two = pr[r1-1][c1-1][0] + pr[r1-1][c1-1][1]
-    
-    total = pr[r2][c2][0] + pr[r2][c2][1]
-    
-    print(total + two - (left0 + left1 + above0 + above1))
-    
-        
-        
-    
-    
+    for i in range(r1 - 1, r2):
+        if i >= 0 and c1 - 2 >= 0 and matrix[i][c1 - 2] == "." and matrix[i][c1 - 1] == ".":
+            result -= 1
+
+    for i in range(c1 - 1, c2): 
+        if i >= 0 and r1 - 2 >= 0 and matrix[r1 - 2][i] == "." and matrix[r1 - 1][i] == ".":
+            result -= 1     
+    print(result)
