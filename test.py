@@ -1,10 +1,13 @@
-def find_longest_subarray(A, N, K):
-    MaxLen = 0
-    Len = 0
-    for i in range(N):
-        if K % A[i] == 0:
-            Len += 1
-            MaxLen = max(MaxLen, Len)
-        else:
-            Len = 0
-    return MaxLen
+import sym
+
+
+import sys
+sys.setrecursionlimit(3000)
+def display(n):
+    if n == 1:
+        return 
+    display(n-1)
+    print("Segni")
+    
+
+display(5)
