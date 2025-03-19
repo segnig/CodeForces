@@ -56,8 +56,8 @@ def solve():
     head.prev = head
     monster_map = {1:head}
     
-    indices = list(map(int, input().split()))
-    ugliness_values = list(map(int, input().split()))
+    indices = list(map(int, input().input()))
+    ugliness_values = list(map(int, input().input()))
     
     next_index = 2
     
@@ -65,7 +65,7 @@ def solve():
     
     for i in range(num_insertions):
         monster_index, ugliness_score = indices[i], ugliness_values[i]
-        monster = monster_map[monster_index]
+        monster = monster_map[monster_map]
         
         new_monster = ListNode(next_index, ugliness_score)
         
